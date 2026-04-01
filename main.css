@@ -1,0 +1,163 @@
+/* 
+- Universidad del Valle de Guatemala
+- Sistemas y Tecnologías Web
+- Integrantes:
+Ronald Catún - 19789
+Julio Pellecer - 241071
+*/
+
+/* Variables globales, reset y estilos base*/
+
+/*Variables*/
+:root {
+  /* Colores de fondo y superficie*/
+  --color-fondo:            #0d0f14;
+  --color-superficie:       #161b26;
+  --color-superficie-2:     #1e2535;
+  --color-borde:            #2a3347;
+  --color-borde-hover:      #3d4f6e;
+
+  /* Color de acento*/
+  --color-acento:           #4f9cf9;
+  --color-acento-oscuro:    #2d7de0;
+  --color-acento-suave:     rgba(79, 156, 249, 0.15);
+
+  /* Colores de texto*/
+  --color-texto:            #e8edf5;
+  --color-texto-secundario: #7a8ba6;
+  --color-texto-sutil:      #4a5a72;
+
+  /* Colores de estado*/
+  --color-exito:    #3ecf8e;
+  --color-error:    #f56565;
+  --color-peligro:  #e53e3e;
+
+  /* Tipografia*/
+  --fuente-titulos: 'Syne', sans-serif;
+  --fuente-cuerpo:  'Mulish', sans-serif;
+
+  --texto-xs:   0.75rem;
+  --texto-sm:   0.875rem;
+  --texto-base: 1rem;
+  --texto-lg:   1.125rem;
+  --texto-xl:   1.25rem;
+  --texto-2xl:  1.5rem;
+  --texto-3xl:  1.875rem;
+  --texto-4xl:  2.25rem;
+
+  /* Espaciado */
+  --espacio-1:  0.25rem;
+  --espacio-2:  0.5rem;
+  --espacio-3:  0.75rem;
+  --espacio-4:  1rem;
+  --espacio-5:  1.25rem;
+  --espacio-6:  1.5rem;
+  --espacio-8:  2rem;
+  --espacio-10: 2.5rem;
+  --espacio-12: 3rem;
+  --espacio-16: 4rem;
+
+  /* Bordes redondeados */
+  --radio-sm:   6px;
+  --radio-md:   12px;
+  --radio-lg:   18px;
+  --radio-full: 9999px;
+
+  /* Sombras */
+  --sombra-sm:     0 1px 3px rgba(0,0,0,0.4);
+  --sombra-md:     0 4px 16px rgba(0,0,0,0.5);
+  --sombra-lg:     0 8px 32px rgba(0,0,0,0.6);
+  --sombra-acento: 0 0 20px rgba(79,156,249,0.2);
+
+  /* Transiciones */
+  --transicion-rapida:  150ms ease;
+  --transicion-normal:  250ms ease;
+  --transicion-lenta:   400ms ease;
+
+  /* Altura de la barra de navegacion */
+  --altura-navbar: 64px;
+}
+
+/*Reset*/
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--fuente-cuerpo);
+  font-size: var(--texto-base);
+  font-weight: 400;
+  line-height: 1.65;
+  color: var(--color-texto);
+  background-color: var(--color-fondo);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/*Tipografia */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--fuente-titulos);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--color-texto);
+}
+
+h1 { font-size: var(--texto-3xl); font-weight: 800; }
+h2 { font-size: var(--texto-2xl); }
+h3 { font-size: var(--texto-xl); }
+h4 { font-size: var(--texto-lg); }
+
+p   { color: var(--color-texto-secundario); line-height: 1.7; }
+a   { color: var(--color-acento); text-decoration: none; transition: color var(--transicion-rapida); }
+a:hover { color: var(--color-texto); }
+
+ul, ol   { list-style: none; }
+img, svg { display: block; max-width: 100%; }
+button   { cursor: pointer; font-family: var(--fuente-cuerpo); border: none; background: none; }
+input, textarea, select { font-family: var(--fuente-cuerpo); font-size: var(--texto-base); }
+
+/*Scrollbar*/
+::-webkit-scrollbar       { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--color-fondo); }
+::-webkit-scrollbar-thumb { background: var(--color-borde); border-radius: var(--radio-full); }
+::-webkit-scrollbar-thumb:hover { background: var(--color-borde-hover); }
+
+/*Seleccion de texto*/
+::selection { background: var(--color-acento); color: #fff; }
+
+/*FOCUS*/
+:focus-visible {
+  outline: 2px solid var(--color-acento);
+  outline-offset: 3px;
+  border-radius: var(--radio-sm);
+}
+
+/*Utilidades*/
+.texto-secundario { color: var(--color-texto-secundario); }
+.texto-acento     { color: var(--color-acento); }
+.oculto-accesible {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0,0,0,0); white-space: nowrap; border-width: 0;
+}
+
+/*Animaciones*/
+@keyframes aparecer {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes brillo-deslizante {
+  0%   { background-position: -400px 0; }
+  100% { background-position:  400px 0; }
+}
+
+@keyframes girar {
+  to { transform: rotate(360deg); }
+}
+
+.con-animacion { animation: aparecer var(--transicion-lenta) both; }
