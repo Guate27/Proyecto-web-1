@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Mulish:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/componentes.css" />
+</head>
+<body>
+
+  <!-- BARRA DE NAVEGACIÓN -->
+  <nav class="barra-navegacion">
+    <a href="#lista" class="barra-navegacion__marca">Blog<span>Stream</span></a>
+    <div class="barra-navegacion__enlaces">
+      <a href="#lista"     class="enlace-nav" data-ruta="lista">Inicio</a>
+      <a href="#crear"     class="enlace-nav" data-ruta="crear">Crear Post</a>
+      <a href="#favoritos" class="enlace-nav" data-ruta="favoritos">Favoritos</a>
+    </div>
+    <button class="barra-navegacion__boton-menu" id="boton_menu_movil" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Notificación  -->
+  <div id="notificacion" class="notificacion" role="alert" aria-live="polite"></div>
+
+  <!-- Contenedor principal donde se renderizan las vistas -->
+  <main id="contenedor_app" class="contenedor-app"></main>
+
+
+
+
+  <!-- Plantilla: Listado de posts -->
+  <template id="plantilla_lista">
+    <section class="vista vista--lista">
+      <header class="vista__encabezado">
+        <h1>Publicaciones</h1>
+        <p class="vista__subtitulo">Explora, crea y gestiona posts</p>
+      </header>
+
+      <!-- Filtros de búsqueda -->
+      <div class="contenedor-filtros">
+        <div class="contenedor-filtros__busqueda">
+          <input type="text" id="filtro_texto" placeholder="Buscar en título o contenido…" class="campo-texto" />
+        </div>
+        <div class="contenedor-filtros__selectores">
+          <select id="filtro_etiqueta" class="campo-texto">
+            <option value="">Todas las etiquetas</option>
+          </select>
+          <select id="filtro_usuario" class="campo-texto">
+            <option value="">Todos los usuarios</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Cuadrícula de tarjetas -->
+      <div id="cuadricula_posts" class="cuadricula-posts"></div>
+
+      <!-- Controles de paginación -->
+      <div id="controles_paginacion" class="controles-paginacion"></div>
+    </section>
+  </template>
+
+  <!-- Plantilla para Detalle de un post -->
+  <template id="plantilla_detalle">
+    <section class="vista vista--detalle">
+      <button class="boton boton--secundario" id="boton_regresar">← Volver al listado</button>
+      <div id="contenido_detalle" class="contenido-detalle"></div>
+    </section>
+  </template>
+
+  <!-- Plantilla para crear post -->
+  <template id="plantilla_crear">
+    <section class="vista vista--formulario">
+      <header class="vista__encabezado">
+        <h1>Nueva Publicación</h1>
+        <p class="vista__subtitulo">Completa el formulario para crear un post</p>
+      </header>
+      <form id="formulario_crear" class="formulario" novalidate>
+        <div class="formulario__grupo">
+          <label for="crear_titulo" class="formulario__etiqueta">Título <span class="campo-requerido">*</span></label>
+          <input type="text" id="crear_titulo" class="campo-texto" placeholder="Mínimo 5 caracteres" />
+          <span class="formulario__error" id="error_crear_titulo"></span>
+        </div>
+        <div class="formulario__grupo">
+          <label for="crear_contenido" class="formulario__etiqueta">Contenido <span class="campo-requerido">*</span></label>
+          <textarea id="crear_contenido" class="campo-texto campo-texto--area" placeholder="Mínimo 20 caracteres" rows="6"></textarea>
+          <span class="formulario__error" id="error_crear_contenido"></span>
+        </div>
+        <div class="formulario__grupo">
+          <label for="crear_autor" class="formulario__etiqueta">Nombre del autor <span class="campo-requerido">*</span></label>
+          <input type="text" id="crear_autor" class="campo-texto" placeholder="Tu nombre" />
+          <span class="formulario__error" id="error_crear_autor"></span>
+        </div>
+        <div class="formulario__acciones">
+          <button type="submit" class="boton boton--principal" id="boton_publicar">Publicar</button>
+          <a href="#lista" class="boton boton--secundario">Cancelar</a>
+        </div>
+      </form>
+    </section>
+  </template>
+
+  <!-- Plantilla para editar post -->
+  <template id="plantilla_editar">
+    <section class="vista vista--formulario">
+      <header class="vista__encabezado">
+        <h1>Editar Publicación</h1>
+        <p class="vista__subtitulo">Modifica los datos del post</p>
+      </header>
+      <form id="formulario_editar" class="formulario" novalidate>
+        <input type="hidden" id="editar_id" />
+        <div class="formulario__grupo">
+          <label for="editar_titulo" class="formulario__etiqueta">Título <span class="campo-requerido">*</span></label>
+          <input type="text" id="editar_titulo" class="campo-texto" />
+          <span class="formulario__error" id="error_editar_titulo"></span>
+        </div>
+        <div class="formulario__grupo">
+          <label for="editar_contenido" class="formulario__etiqueta">Contenido <span class="campo-requerido">*</span></label>
+          <textarea id="editar_contenido" class="campo-texto campo-texto--area" rows="6"></textarea>
+          <span class="formulario__error" id="error_editar_contenido"></span>
+        </div>
+        <div class="formulario__acciones">
+          <button type="submit" class="boton boton--principal" id="boton_guardar_cambios">Guardar cambios</button>
+          <button type="button" class="boton boton--secundario" id="boton_cancelar_edicion">Cancelar</button>
+        </div>
+      </form>
+    </section>
+  </template>
+
+  <!-- Plantilla: Favoritos -->
+  <template id="plantilla_favoritos">
+    <section class="vista vista--favoritos">
+      <header class="vista__encabezado">
+        <h1>Favoritos</h1>
+        <p class="vista__subtitulo">Posts que guardaste para leer después</p>
+      </header>
+      <div id="cuadricula_favoritos" class="cuadricula-posts"></div>
+    </section>
+  </template>
+
+  <!--confirmación para eliminar -->
+  <div id="modal_confirmacion" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal_titulo">
+    <div class="modal__fondo" id="modal_fondo"></div>
+    <div class="modal__caja">
+      <h2 class="modal__titulo" id="modal_titulo">¿Eliminar publicación?</h2>
+      <p class="modal__mensaje">Esta acción no se puede deshacer. ¿Estás seguro?</p>
+      <div class="modal__acciones">
+        <button class="boton boton--peligro" id="boton_confirmar_eliminar">Sí, eliminar</button>
+        <button class="boton boton--secundario" id="boton_cancelar_eliminar">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
