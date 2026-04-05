@@ -21,3 +21,23 @@ export async function obtenerPosts(pagina = 1, cantidad = 10) {
     throw error;
   }
 }
+
+
+//Función que accede a la API y le hace una petición GET para acceder a la informaciónd de un post específico utilizando su id 
+export async function obtenerPostPorId(id) {
+  const url = `${URL_BASE}/posts/${id}`;
+ 
+  try {
+    const respuesta = await fetch(url);
+ 
+    if (!respuesta.ok) {
+      throw new Error(`Error al obtener el post ${id}: ${respuesta.status}`);
+    }
+ 
+    const datos = await respuesta.json();
+    return datos;
+ 
+  } catch (error) {
+    throw error;
+  }
+}
