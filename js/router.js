@@ -49,7 +49,7 @@ function cargarVista(hash) {
   }
 }
 
-//Función que detecta el cambio del hash de la URL cada vez que el usuario accede a un apartado de la aplicación y ejecuta la función cargarVista. 
+//Función que detecta el cambio del hash de la URL cada vez que el usuario accede a un apartado de la aplicación ejecutando la función cargarVista. 
 // Esta función también permite asegurar que la página siempre le muestre contenido al usuario desde que entra por primera vez 
 export function iniciarRouter() {
   // Detección de cambios de hash utilizado en la URL 
