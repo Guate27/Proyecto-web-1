@@ -103,6 +103,11 @@ function renderizarPaginacion() {
     });
 }
 
+/* Funciones pendientes */
+export async function mostrarDetalle(id) {}
+export async function mostrarCrear()     {}
+export async function mostrarEditar(id) {}
+export async function mostrarFavoritos() {}
 
 // Definición de evento que controla la apertura y cierre del menú de navegación 
 document.addEventListener('DOMContentLoaded', () => {
