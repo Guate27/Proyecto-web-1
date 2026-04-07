@@ -104,7 +104,64 @@ function renderizarPaginacion() {
 }
 
 /* Funciones pendientes */
-export async function mostrarDetalle(id) {}
+/* Muestra La información completa  de un post específico.*/
+export async function mostrarDetalle(id) {
+  const contenedor = document.getElementById('contenedor_app');
+ 
+  const vista = clonarPlantilla('plantilla_detalle');
+  contenedor.innerHTML = '';
+  contenedor.appendChild(vista);
+ 
+  const contenidoDetalle = document.getElementById('contenido_detalle');
+  contenidoDetalle.innerHTML = '<div class="spinner"></div>';
+ 
+  document.getElementById('boton_regresar')
+    ?.addEventListener('click', () => {
+      window.location.hash = '#lista';
+    });
+ 
+  try {
+    const post = await obtenerPostPorId(id);
+ 
+    const etiquetasHTML = post.tags
+      .map(etiqueta => `<span class="etiqueta">${etiqueta}</span>`)
+      .join('');
+ 
+    contenidoDetalle.innerHTML = `
+      <div class="contenido-detalle__etiquetas">${etiquetasHTML}</div>
+      <h1 class="contenido-detalle__titulo">${post.title}</h1>
+      <div class="contenido-detalle__meta">
+        <span class="contenido-detalle__meta-item">
+          <strong>ID:</strong> ${post.id}
+        </span>
+        <span class="contenido-detalle__meta-item">
+          <strong>Autor:</strong> Usuario #${post.userId}
+        </span>
+        <span class="contenido-detalle__meta-item">
+          <strong>Reacciones:</strong> 👍 ${post.reactions.likes} · 👎 ${post.reactions.dislikes}
+        </span>
+        <span class="contenido-detalle__meta-item">
+          <strong>Vistas:</strong> ${post.views}
+        </span>
+        <span class="contenido-detalle__meta-item">
+          <strong>Etiquetas:</strong> ${post.tags.join(', ')}
+        </span>
+        <span class="contenido-detalle__meta-item">
+          <strong>Comentarios:</strong> disponibles en la API
+        </span>
+      </div>
+      <p class="contenido-detalle__cuerpo">${post.body}</p>
+      <div class="contenido-detalle__acciones">
+        <a href="#editar/${post.id}" class="boton boton--principal">Editar</a>
+        <button class="boton boton--peligro" id="boton_eliminar_post">Eliminar</button>
+      </div>
+    `;
+ 
+  } catch (error) {
+    mostrarEstadoError(contenidoDetalle, 'No se pudo cargar el post');
+  }
+}
+
 export async function mostrarCrear()     {}
 export async function mostrarEditar(id) {}
 export async function mostrarFavoritos() {}
@@ -124,5 +181,6 @@ document.addEventListener('DOMContentLoaded', () => {
     enlace.addEventListener('click', () => {
       enlaces.classList.remove('abierto');
     });
+  
   });
 });
