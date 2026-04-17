@@ -1,6 +1,4 @@
-//Validaciones de formularios desde JavaScript 
 
-//Muestra un mensaje de error junto al campo que falló 
 function mostrarErrorCampo(idError, idCampo, mensaje) {
   const elementoError = document.getElementById(idError);
   const elementoCampo = document.getElementById(idCampo);
@@ -8,7 +6,6 @@ function mostrarErrorCampo(idError, idCampo, mensaje) {
   if (elementoCampo) elementoCampo.classList.add('campo-texto--error');
 }
 
-//Limpia el mensaje de error y el estilo rojo de un campo 
 function limpiarErrorCampo(idError, idCampo) {
   const elementoError = document.getElementById(idError);
   const elementoCampo = document.getElementById(idCampo);
@@ -16,15 +13,11 @@ function limpiarErrorCampo(idError, idCampo) {
   if (elementoCampo) elementoCampo.classList.remove('campo-texto--error');
 }
 
-// Limpia todos los errores del formulario antes de una nueva validación 
 function limpiarTodosLosErrores(campos) {
   campos.forEach(({ idError, idCampo }) => limpiarErrorCampo(idError, idCampo));
 }
 
-/*
-   Valida título (mín. 5 chars), contenido (mín. 20 chars) y autor
-   Devuelve { esValido, datos }
- */
+
 export function validarFormularioCrear() {
   const titulo    = document.getElementById('crear_titulo');
   const contenido = document.getElementById('crear_contenido');
@@ -74,11 +67,7 @@ export function validarFormularioCrear() {
   return { esValido: false, datos: null };
 }
 
-/* 
-   validarFormularioEditar()
-   Valida título (mín. 5 chars) y contenido (mín. 20 chars)
-   Devuelve { esValido, datos }
-*/
+
 export function validarFormularioEditar() {
   const titulo    = document.getElementById('editar_titulo');
   const contenido = document.getElementById('editar_contenido');
