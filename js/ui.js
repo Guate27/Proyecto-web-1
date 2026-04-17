@@ -2,39 +2,35 @@
 export function renderizarTarjetaPost(post) {
   const tarjeta = document.createElement('article');
   tarjeta.classList.add('tarjeta-post');
-
-  // Construir las etiquetas del post
+ 
   const etiquetasHTML = post.tags
     .map(etiqueta => `<span class="etiqueta">${etiqueta}</span>`)
     .join('');
-
-  // Poner el cuerpo del post a 120 caracteres para el resumen
+ 
   const resumen = post.body.length > 120
     ? post.body.substring(0, 120) + '...'
     : post.body;
-
+ 
+  const favoritos  = obtenerFavoritos();
+  const esFavorito = favoritos.some(f => f.id === post.id);
+ 
   tarjeta.innerHTML = `
-    <div class="tarjeta-post__etiquetas">
-      ${etiquetasHTML}
-    </div>
+    <div class="tarjeta-post__etiquetas">${etiquetasHTML}</div>
     <h3 class="tarjeta-post__titulo">${post.title}</h3>
     <p class="tarjeta-post__resumen">${resumen}</p>
     <div class="tarjeta-post__pie">
       <span class="tarjeta-post__autor">Usuario #${post.userId}</span>
       <div class="tarjeta-post__acciones">
         <button 
-          class="boton-favorito" 
-          id="favorito_${post.id}"
+          class="boton-favorito ${esFavorito ? 'guardado' : ''}" 
           data-id="${post.id}"
-          aria-label="Guardar en favoritos"
-        >☆</button>
-        <a href="#detalle/${post.id}" class="boton boton--principal boton--pequeno">
-          Ver más
-        </a>
+          aria-label="${esFavorito ? 'Quitar de favoritos' : 'Guardar en favoritos'}"
+        >${esFavorito ? '★' : '☆'}</button>
+        <a href="#detalle/${post.id}" class="boton boton--principal boton--pequeno">Ver más</a>
       </div>
     </div>
   `;
-
+ 
   return tarjeta;
 }
 export function mostrarEsqueletos(contenedor, cantidad = 10) {
@@ -63,7 +59,6 @@ export function mostrarEstadoVacio(contenedor, mensaje = 'No se encontraron publ
     </div>
   `;
 }
-
 
 export function mostrarEstadoError(contenedor, mensaje = 'Ocurrió un error al cargar los posts') {
   contenedor.innerHTML = `
