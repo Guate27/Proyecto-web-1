@@ -41,3 +41,64 @@ export async function obtenerPostPorId(id) {
     throw error;
   }
 }
+
+// Hace una petición GET buscando posts por texto en el título o cuerpo
+export async function buscarPosts(texto) {
+  const url = `${URL_BASE}/posts/search?q=${encodeURIComponent(texto)}`;
+ 
+  try {
+    const respuesta = await fetch(url);
+    if (!respuesta.ok) throw new Error(`Error al buscar posts: ${respuesta.status}`);
+    return await respuesta.json();
+  } catch (error) {
+    throw error;
+  }
+}
+ 
+// Hace una petición POST para crear una nueva publicación 
+export async function crearPost(datos) {
+  const url = `${URL_BASE}/posts/add`;
+ 
+  try {
+    const respuesta = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(datos)
+    });
+    if (!respuesta.ok) throw new Error(`Error al crear el post: ${respuesta.status}`);
+    return await respuesta.json();
+  } catch (error) {
+    throw error;
+  }
+}
+ 
+//Hace una petición PUT para actualizar una publicación existente
+export async function actualizarPost(id, datos) {
+  const url = `${URL_BASE}/posts/${id}`;
+ 
+  try {
+    const respuesta = await fetch(url, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(datos)
+    });
+    if (!respuesta.ok) throw new Error(`Error al actualizar el post ${id}: ${respuesta.status}`);
+    return await respuesta.json();
+  } catch (error) {
+    throw error;
+  }
+}
+ 
+//Hace una petición DELETE para eliminar una publicación
+export async function eliminarPost(id) {
+  const url = `${URL_BASE}/posts/${id}`;
+ 
+  try {
+    const respuesta = await fetch(url, { method: 'DELETE' });
+    if (!respuesta.ok) throw new Error(`Error al eliminar el post ${id}: ${respuesta.status}`);
+    return await respuesta.json();
+  } catch (error) {
+    throw error;
+  }
+}
+
