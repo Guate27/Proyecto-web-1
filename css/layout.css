@@ -1,4 +1,3 @@
-/* ── Barra de navegación ── */
 .barra-navegacion {
   position: fixed;
   top: 0;
@@ -56,7 +55,6 @@
   background: var(--color-acento-suave);
 }
 
-/* Botón hamburguesa para móvil */
 .barra-navegacion__boton-menu {
   display: none;
   flex-direction: column;
@@ -76,7 +74,6 @@
   transition: transform var(--transicion-normal), opacity var(--transicion-rapida);
 }
 
-/* ── Contenedor principal de la app ── */
 .contenedor-app {
   max-width: 1200px;
   margin-left: auto;
@@ -85,7 +82,6 @@
   min-height: calc(100vh - var(--altura-navbar));
 }
 
-/* ── Vistas ── */
 .vista {
   animation: aparecer var(--transicion-lenta) both;
 }
@@ -113,7 +109,6 @@
   margin: 0 auto;
 }
 
-/* ── Filtros ── */
 .contenedor-filtros {
   display: flex;
   flex-wrap: wrap;
@@ -144,7 +139,6 @@
   flex: 1 1 120px;
 }
 
-/* ── Paginación ── */
 .controles-paginacion {
   display: flex;
   justify-content: center;
@@ -161,7 +155,6 @@
   text-align: center;
 }
 
-/* ── Notificación flotante (toast) ── */
 .notificacion {
   position: fixed;
   bottom: var(--espacio-6);
@@ -191,7 +184,6 @@
 .notificacion--error  { background: var(--color-error); }
 .notificacion--info   { background: var(--color-acento); }
 
-/* ── Modal de confirmación ── */
 .modal {
   position: fixed;
   inset: 0;
@@ -249,7 +241,6 @@
   justify-content: flex-end;
 }
 
-/* ── Responsive ── */
 @media (max-width: 768px) {
   .barra-navegacion {
     padding: 0 var(--espacio-5);
