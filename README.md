@@ -57,6 +57,6 @@ https://canva.link/sm8423a4xxm6wnt
 http://ssh.chicharronconpelos.shop/julio241071/proyecto_1 
 ## Foto del funcionamiento
 <img width="1863" height="973" alt="image" src="https://github.com/user-attachments/assets/a629300a-b5de-4168-b8bc-e67c6a920f54" />
-## Enlace video funcionamiento
+## Enlace del video
 https://youtu.be/b67-oXMjN8U
 
