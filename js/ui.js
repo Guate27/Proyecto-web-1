@@ -1,4 +1,4 @@
-
+import { obtenerFavoritos } from './main.js';
 export function renderizarTarjetaPost(post) {
   const tarjeta = document.createElement('article');
   tarjeta.classList.add('tarjeta-post');
